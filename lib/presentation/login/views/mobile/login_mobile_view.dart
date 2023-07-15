@@ -1,4 +1,5 @@
 import 'package:challenge/application/features/login/login_cubit.dart';
+import 'package:challenge/presentation/cards/cards_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -45,7 +46,7 @@ class LoginMobileView extends HookConsumerWidget {
                     borderRadius: BorderRadius.circular(18),
                     border: Border.all(color: const Color(0xFFA3A5A9))),
                 padding:
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: TextField(
                   controller: emailTFC,
                   cursorColor: Colors.black,
@@ -68,7 +69,7 @@ class LoginMobileView extends HookConsumerWidget {
                     borderRadius: BorderRadius.circular(18),
                     border: Border.all(color: const Color(0xFFA3A5A9))),
                 padding:
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: TextField(
                   controller: passwordTFC,
                   cursorColor: Colors.black,
@@ -98,42 +99,47 @@ class LoginMobileView extends HookConsumerWidget {
                   children: [
                     Expanded(
                         child: ElevatedButton(
-                          style: ButtonStyle(
-                              backgroundColor: MaterialStatePropertyAll<Color>(
-                                  validData.value
-                                      ? const Color(0xff181D29)
-                                      : const Color(0xffE1E1E4)),
-                              shape: MaterialStatePropertyAll<OutlinedBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18))),
-                              padding: const MaterialStatePropertyAll<EdgeInsets>(
-                                  EdgeInsets.symmetric(
-                                      horizontal: 36, vertical: 16))),
-                          onPressed: validData.value
-                              ? () {
-                            loginCubit
-                                .login(emailTFC.value.text,
-                                passwordTFC.value.text)
-                                .then((status) {
-                              if (status) {
-                            // todo navigate to cards screen
-                              } else {
-                            // todo handle failed login
-                              }
-                            });
-                          }
-                              : null,
-                          child: Text('Login',
-                              style: validData.value
-                                  ? GoogleFonts.poppins(
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll<Color>(
+                              validData.value
+                                  ? const Color(0xff181D29)
+                                  : const Color(0xffE1E1E4)),
+                          shape: MaterialStatePropertyAll<OutlinedBorder>(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18))),
+                          padding: const MaterialStatePropertyAll<EdgeInsets>(
+                              EdgeInsets.symmetric(
+                                  horizontal: 36, vertical: 16))),
+                      onPressed: validData.value
+                          ? () {
+                              loginCubit
+                                  .login(emailTFC.value.text,
+                                      passwordTFC.value.text)
+                                  .then((status) {
+                                if (status) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const CardsScreen(),
+                                    ),
+                                  );
+                                } else {
+                                  // todo handle failed login
+                                }
+                              });
+                            }
+                          : null,
+                      child: Text('Login',
+                          style: validData.value
+                              ? GoogleFonts.poppins(
                                   color: const Color(0xffF5F5F7),
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500)
-                                  : GoogleFonts.poppins(
+                              : GoogleFonts.poppins(
                                   color: const Color(0xffA3A5A9),
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500)),
-                        )),
+                    )),
                   ],
                 ),
               ),
