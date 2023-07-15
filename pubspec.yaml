@@ -21,6 +21,8 @@ dependencies:
   shared_preferences: ^2.2.0
   json_annotation: ^4.8.1
   google_fonts: ^5.1.0
+  stacked_card_carousel: ^0.0.4
+  flutter_swipe_action_cell: ^3.1.2
 
 dev_dependencies:
   flutter_test:
