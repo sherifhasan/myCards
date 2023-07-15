@@ -1,5 +1,6 @@
 import 'package:challenge/application/features/login/login_cubit.dart';
 import 'package:challenge/presentation/cards/cards_screen.dart';
+import 'package:challenge/presentation/shared/awesome_top_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -124,7 +125,18 @@ class LoginMobileView extends HookConsumerWidget {
                                     ),
                                   );
                                 } else {
-                                  // todo handle failed login
+                                  awesomeTopSnackBar(
+                                    context,
+                                    "Invalid email or password",
+                                    textStyle: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 14,
+                                        height: 2,
+                                        color: const Color(0xFF464A54)),
+                                    backgroundColor: const Color(0xFFF9DEDC),
+                                    icon: const Icon(Icons.info_outline_rounded,
+                                        color: Color(0xffD93838)),
+                                  );
                                 }
                               });
                             }
