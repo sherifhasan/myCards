@@ -1,4 +1,5 @@
 import 'package:challenge/application/features/cards/card_cubit.dart';
+import 'package:challenge/presentation/cards/add_card_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -82,8 +83,11 @@ class CardsMobileView extends HookConsumerWidget {
                                                 handler) async {
                                               handler(false);
                                               //for edit
-                                              // todo navigate to add screen
-
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          AddCardScreen(
+                                                              card: card)));
                                             },
                                             color: const Color(0xFF78F5EE)),
                                       ],
@@ -206,7 +210,8 @@ class CardsMobileView extends HookConsumerWidget {
                     padding: const MaterialStatePropertyAll<EdgeInsets>(
                         EdgeInsets.symmetric(horizontal: 36, vertical: 16))),
                 onPressed: () {
-                  // todo navigate to add screen
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const AddCardScreen()));
                 },
                 child: Text('New',
                     style: GoogleFonts.poppins(

@@ -1,4 +1,5 @@
 import 'package:challenge/application/features/cards/card_cubit.dart';
+import 'package:challenge/presentation/cards/add_card_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -185,7 +186,11 @@ class CardsWebView extends HookConsumerWidget {
                                                 value: '1',
                                                 child: const Text('Edit'),
                                                 onTap: () {
-                                                  // todo navigate to add screen
+                                                  Navigator.of(context).push(
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              AddCardScreen(
+                                                                  card: card)));
                                                 },
                                               ),
                                               PopupMenuItem<String>(
@@ -221,7 +226,8 @@ class CardsWebView extends HookConsumerWidget {
                       padding: const MaterialStatePropertyAll<EdgeInsets>(
                           EdgeInsets.symmetric(horizontal: 36, vertical: 16))),
                   onPressed: () {
-                    // todo navigate to add screen
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const AddCardScreen()));
                   },
                   child: Text('New',
                       style: GoogleFonts.poppins(
