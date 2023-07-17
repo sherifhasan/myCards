@@ -1,9 +1,10 @@
+import 'package:auto_route/annotations.dart';
 import 'package:challenge/presentation/login/views/mobile/login_mobile_view.dart';
 import 'package:challenge/presentation/login/views/web/login_web_view.dart';
 import 'package:challenge/presentation/shared/responsive.dart';
 import 'package:flutter/material.dart';
 
-
+@RoutePage()
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 

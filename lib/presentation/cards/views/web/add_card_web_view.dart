@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:challenge/application/features/cards/card_cubit.dart';
 import 'package:challenge/domain/cards/models/card_model.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class AddCardWebView extends HookConsumerWidget {
                   padding: const MaterialStatePropertyAll<EdgeInsets>(
                       EdgeInsets.symmetric(horizontal: 36, vertical: 16))),
               onPressed: () {
-                Navigator.pop(context);
+                context.router.pop();
               },
               child: Text('Cancel',
                   style: GoogleFonts.poppins(
@@ -76,7 +77,7 @@ class AddCardWebView extends HookConsumerWidget {
                         iban: ibanTFC.value.text),
                   );
                 }
-                Navigator.pop(context);
+                context.router.pop();
               },
               child: Text('Save',
                   style: GoogleFonts.poppins(

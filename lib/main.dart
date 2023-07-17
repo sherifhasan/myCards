@@ -1,7 +1,7 @@
-import 'package:challenge/presentation/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import 'presentation/router/app_router.dart';
 import 'application/utils/storage.dart';
 
 void main() async {
@@ -10,19 +10,23 @@ void main() async {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+final appRouterProvider = Provider<AppRouter>((ref) => AppRouter());
+
+class MyApp extends HookConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final appRouter = ref.watch(appRouterProvider);
+
+    return MaterialApp.router(
       title: 'Flutter coding challenge',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
         useMaterial3: true,
       ),
-      home: const LoginScreen(),
+      routerConfig: appRouter.config(),
     );
   }
 }
