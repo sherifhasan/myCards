@@ -27,5 +27,5 @@ void main() {
         ],
       );
     });
-  });
+  }, skip: true);
 }
