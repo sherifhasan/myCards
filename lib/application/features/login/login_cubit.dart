@@ -1,14 +1,10 @@
+import 'package:bloc/bloc.dart';
 import 'package:challenge/domain/login/login_repository.dart';
-import 'package:challenge/infrastructure/login/login_repository_imp.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:riverbloc/riverbloc.dart';
 
 part 'login_cubit.freezed.dart';
 
 part 'login_state.dart';
-
-final loginCubitProvider = BlocProvider.autoDispose<LoginCubit, LoginState>(
-    (ref) => LoginCubit(ref.watch(loginRepositoryProvider)));
 
 class LoginCubit extends Cubit<LoginState> {
   final LoginRepository _repository;

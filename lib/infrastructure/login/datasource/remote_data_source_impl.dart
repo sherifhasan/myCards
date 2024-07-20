@@ -1,10 +1,5 @@
 import 'package:challenge/application/utils/app_constants.dart';
 import 'package:challenge/infrastructure/login/datasource/remote_data_source.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-final remoteDataSourceProvider = Provider<RemoteDataSource>((ref) {
-  return RemoteDataSourceImpl();
-});
 
 class RemoteDataSourceImpl extends RemoteDataSource {
   @override

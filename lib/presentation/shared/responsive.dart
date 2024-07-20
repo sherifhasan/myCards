@@ -5,10 +5,10 @@ class Responsive extends StatelessWidget {
   final Widget desktop;
 
   const Responsive({
-    Key? key,
+    super.key,
     required this.mobile,
     required this.desktop,
-  }) : super(key: key);
+  });
 
   // This isMobile, isDesktop help us later
   static bool isMobile(BuildContext context) =>

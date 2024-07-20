@@ -11,7 +11,7 @@ class AwesomeTopSnackBar extends StatefulWidget {
   final bool isExpanded;
 
   const AwesomeTopSnackBar({
-    Key? key,
+    super.key,
     required this.message,
     this.onCloseClick,
     this.isExpanded = false,
@@ -23,7 +23,7 @@ class AwesomeTopSnackBar extends StatefulWidget {
     this.icon,
     this.iconWithDecoration,
     required this.backgroundColor,
-  }) : super(key: key);
+  });
 
   @override
   AwesomeTopSnackBarState createState() => AwesomeTopSnackBarState();
@@ -132,7 +132,6 @@ void mySnackBar(
 
 class _TopSnackBar extends StatefulWidget {
   const _TopSnackBar({
-    Key? key,
     required this.child,
     required this.onDismissed,
     required this.animationDuration,
@@ -147,7 +146,7 @@ class _TopSnackBar extends StatefulWidget {
     this.persistent = false,
     this.onAnimationControllerInit,
     this.dismissType = DismissType.onSwipe,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final VoidCallback onDismissed;

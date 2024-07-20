@@ -3,41 +3,36 @@ import 'package:challenge/application/features/cards/card_cubit.dart';
 import 'package:challenge/presentation/router/app_router.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:stacked_card_carousel/stacked_card_carousel.dart';
 
-class CardsWebView extends HookConsumerWidget {
+class CardsWebView extends HookWidget {
   const CardsWebView({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(cardCubitProvider);
-    final cardsCubit = ref.watch(cardCubitProvider.bloc);
+  Widget build(BuildContext context) {
+    final cardsCubit = context.read<CardCubit>();
     final cardsController = usePageController();
 
-    useEffect(() {
-      cardsCubit.getCards();
-      return null;
-    });
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F7),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Stack(
-            alignment: Alignment.center,
-            children: <Widget>[
-              state.when(
-                initial: () => const SizedBox(),
-                loading: () => const Center(
-                  child: CircularProgressIndicator(),
-                ),
-                data: (cards) => Row(
+      body: BlocBuilder<CardCubit, CardState>(builder: (context, state) {
+        return Stack(
+          alignment: Alignment.center,
+          children: <Widget>[
+            state.when(
+              initial: () => const SizedBox(),
+              loading: () => const Center(
+                child: CircularProgressIndicator(),
+              ),
+              data: (cards) => Center(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         FloatingActionButton(
                           shape: const CircleBorder(),
@@ -224,33 +219,33 @@ class CardsWebView extends HookConsumerWidget {
                   ],
                 ),
               ),
-              Positioned(
-                right: 12,
-                bottom: 24,
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                      backgroundColor: const MaterialStatePropertyAll<Color>(
-                          Color(0xff181D29)),
-                      shape: MaterialStatePropertyAll<OutlinedBorder>(
-                          RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18))),
-                      padding: const MaterialStatePropertyAll<EdgeInsets>(
-                          EdgeInsets.symmetric(horizontal: 36, vertical: 16))),
-                  onPressed: () {
-                    context.router.push(AddCardRoute());
-                  },
-                  child: Text('New',
-                      style: GoogleFonts.poppins(
-                          color: const Color(0xffF5F5F7),
-                          fontSize: 16,
-                          letterSpacing: 0.25,
-                          fontWeight: FontWeight.w500)),
-                ),
-              )
-            ],
-          ),
-        ],
-      ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor:
+                        WidgetStateProperty.all<Color>(const Color(0xff181D29)),
+                    shape: WidgetStateProperty.all<OutlinedBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18))),
+                    padding: WidgetStateProperty.all<EdgeInsets>(
+                        const EdgeInsets.symmetric(
+                            horizontal: 54, vertical: 16))),
+                onPressed: () {
+                  context.router.push(AddCardRoute());
+                },
+                child: Text('New',
+                    style: GoogleFonts.poppins(
+                        color: const Color(0xffF5F5F7),
+                        fontSize: 16,
+                        letterSpacing: 0.25,
+                        fontWeight: FontWeight.w500)),
+              ),
+            ),
+          ],
+        );
+      }),
     );
   }
 }

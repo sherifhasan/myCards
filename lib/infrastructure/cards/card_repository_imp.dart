@@ -1,13 +1,7 @@
 import 'package:challenge/domain/cards/card_repository.dart';
 import 'package:challenge/domain/cards/models/card_model.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'datasource/local_data_source.dart';
-import 'datasource/local_data_source_impl.dart';
-
-final cardRepositoryProvider = Provider<CardRepository>((ref) {
-  return CardRepositoryImpl(ref.watch(localDataSourceProvider));
-});
 
 class CardRepositoryImpl extends CardRepository {
   final LocalDataSource _localDataSource;

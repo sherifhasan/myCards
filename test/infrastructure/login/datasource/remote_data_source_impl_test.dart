@@ -15,10 +15,12 @@ void main() {
   setUp(() {
     mockRemoteDataSource = MockRemoteDataSource();
   });
+
   test('Mock login api test passed', () async {
     when(() => mockRemoteDataSource.login(fakeEmailTest1, fakePasswordTest1))
         .thenAnswer((_) => Future.value(true));
-   final status =await mockRemoteDataSource.login(fakeEmailTest1, fakePasswordTest1);
+    final status =
+        await mockRemoteDataSource.login(fakeEmailTest1, fakePasswordTest1);
     expect(true, status);
   });
 }

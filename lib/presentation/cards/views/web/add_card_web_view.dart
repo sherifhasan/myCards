@@ -2,18 +2,18 @@ import 'package:auto_route/auto_route.dart';
 import 'package:challenge/application/features/cards/card_cubit.dart';
 import 'package:challenge/domain/cards/models/card_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class AddCardWebView extends HookConsumerWidget {
+class AddCardWebView extends HookWidget {
   final CardModel? card;
 
   const AddCardWebView({super.key, this.card});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final cardsCubit = ref.watch(cardCubitProvider.bloc);
+  Widget build(BuildContext context) {
+    final cardsCubit = context.read<CardCubit>();
     final cardNameTFC =
             useTextEditingController(text: card != null ? card!.fullName : ''),
         emailTFC =
@@ -33,14 +33,14 @@ class AddCardWebView extends HookConsumerWidget {
           children: [
             TextButton(
               style: ButtonStyle(
-                  shape: MaterialStatePropertyAll<OutlinedBorder>(
+                  shape: WidgetStatePropertyAll<OutlinedBorder>(
                       RoundedRectangleBorder(
                           side: const BorderSide(color: Color(0xFF181D29)),
                           borderRadius: BorderRadius.circular(18))),
-                  padding: const MaterialStatePropertyAll<EdgeInsets>(
+                  padding: const WidgetStatePropertyAll<EdgeInsets>(
                       EdgeInsets.symmetric(horizontal: 36, vertical: 16))),
               onPressed: () {
-                context.router.pop();
+                context.router.maybePop();
               },
               child: Text('Cancel',
                   style: GoogleFonts.poppins(
@@ -53,11 +53,11 @@ class AddCardWebView extends HookConsumerWidget {
             ElevatedButton(
               style: ButtonStyle(
                   backgroundColor:
-                      const MaterialStatePropertyAll<Color>(Color(0xff181D29)),
-                  shape: MaterialStatePropertyAll<OutlinedBorder>(
+                      const WidgetStatePropertyAll<Color>(Color(0xff181D29)),
+                  shape: WidgetStatePropertyAll<OutlinedBorder>(
                       RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18))),
-                  padding: const MaterialStatePropertyAll<EdgeInsets>(
+                  padding: const WidgetStatePropertyAll<EdgeInsets>(
                       EdgeInsets.symmetric(horizontal: 36, vertical: 16))),
               onPressed: () {
                 if (card != null) {
@@ -77,7 +77,7 @@ class AddCardWebView extends HookConsumerWidget {
                         iban: ibanTFC.value.text),
                   );
                 }
-                context.router.pop();
+                context.router.maybePop();
               },
               child: Text('Save',
                   style: GoogleFonts.poppins(

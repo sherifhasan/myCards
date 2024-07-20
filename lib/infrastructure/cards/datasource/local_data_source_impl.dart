@@ -1,16 +1,10 @@
 import 'dart:convert';
 
 import 'package:challenge/application/utils/app_constants.dart';
-import 'package:challenge/application/utils/storage.dart';
 import 'package:challenge/domain/cards/models/card_model.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'local_data_source.dart';
-
-final localDataSourceProvider = Provider<LocalDataSource>((ref) {
-  return LocalDataSourceImpl(PreferenceUtils.instance);
-});
 
 class LocalDataSourceImpl extends LocalDataSource {
   final SharedPreferences _sharedPreferences;
