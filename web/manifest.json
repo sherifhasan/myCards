@@ -1,6 +1,6 @@
 {
-    "name": "challenge",
-    "short_name": "challenge",
+    "name": "mycards",
+    "short_name": "mycards",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

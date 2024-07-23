@@ -3,6 +3,7 @@ import 'package:challenge/application/features/login/login_cubit.dart';
 import 'package:challenge/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'presentation/router/app_router.dart';
 
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
+          textTheme: GoogleFonts.poppinsTextTheme(),
           useMaterial3: true,
         ),
         routerConfig: injection<AppRouter>().config(),
